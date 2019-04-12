@@ -1,4 +1,4 @@
-## [NOT CURRENTLY MAINTAINED]
+## This is Forked version withh all dependancies Up To Dated.
 
 # MaterialChipsInput
 
