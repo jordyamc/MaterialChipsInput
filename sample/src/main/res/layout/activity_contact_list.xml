@@ -11,9 +11,10 @@
     <com.pchmn.materialchips.ChipsInput
         android:id="@+id/chips_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         app:hint="Enter a name"
-        app:maxRows="3" />
+        app:chip_deletable="true"
+        app:maxRows="1" />
 
     <Button
         android:id="@+id/validate"

@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +25,8 @@ import butterknife.ButterKnife;
 public class ContactListActivity extends AppCompatActivity {
 
     private static final String TAG = ContactListActivity.class.toString();
-    @BindView(R.id.chips_input) ChipsInput mChipsInput;
+    @BindView(R.id.chips_input)
+    ChipsInput mChipsInput;
     @BindView(R.id.validate) Button mValidateButton;
     @BindView(R.id.chip_list) TextView mChipListText;
     private List<ContactChip> mContactList;
