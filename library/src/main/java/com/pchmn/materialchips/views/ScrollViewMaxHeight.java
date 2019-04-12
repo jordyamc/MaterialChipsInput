@@ -3,16 +3,21 @@ package com.pchmn.materialchips.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import com.pchmn.materialchips.R;
 import com.pchmn.materialchips.util.ViewUtil;
+
+import androidx.core.widget.NestedScrollView;
 
 public class ScrollViewMaxHeight extends NestedScrollView {
 
     private int mMaxHeight;
     private int mWidthMeasureSpec;
+
+    // by default is scrollable
+    private boolean scrollable = true;
 
     public ScrollViewMaxHeight(Context context) {
         super(context);
@@ -28,8 +33,7 @@ public class ScrollViewMaxHeight extends NestedScrollView {
 
         try {
             mMaxHeight = a.getDimensionPixelSize(R.styleable.ScrollViewMaxHeight_maxHeight, ViewUtil.dpToPx(300));
-        }
-        finally {
+        } finally {
             a.recycle();
         }
     }
@@ -46,4 +50,20 @@ public class ScrollViewMaxHeight extends NestedScrollView {
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(mMaxHeight, MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        return scrollable && super.onTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return scrollable && super.onInterceptTouchEvent(ev);
+    }
+
+    public void setScrollingEnabled(boolean enabled) {
+        scrollable = enabled;
+    }
+
 }
