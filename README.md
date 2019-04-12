@@ -4,16 +4,12 @@
 
 Implementation of Material Design [Chips](https://material.io/guidelines/components/chips.html) component for Android. The library provides two views : [`ChipsInput`](#chipsinput) and [`ChipView`](#chipview).
 
-[![Release](https://jitpack.io/v/pchmn/MaterialChipsInput.svg)](https://jitpack.io/#pchmn/MaterialChipsInput)
+[![Release](https://jitpack.io/v/karanatwal/MaterialChipsInput.svg)](https://jitpack.io/#karanatwal/MaterialChipsInput)
 
-<img src="https://github.com/pchmn/MaterialChipsInput/blob/master/docs/demo2.gif" alt="Demo" height="600px"/>
+<img src="https://github.com/karanatwal/MaterialChipsInput/blob/master/docs/demo2.gif" alt="Demo" height="600px"/>
 
-## Demo
-[Download sample-v1.0.8.apk](https://github.com/pchmn/MaterialChipsInput/raw/master/docs/material-chips-input-sample-v1.0.8.apk)
 
 ## Setup
-
-To use this library your `minSdkVersion` must be >= 15.
 
 In your project level build.gradle :
 ```java
@@ -28,7 +24,7 @@ allprojects {
 In your app level build.gradle :
 ```java
 dependencies {
-    compile 'com.github.pchmn:MaterialChipsInput:1.0.8'
+    compile 'com.github.karanatwal:MaterialChipsInput:2.0.0'
 }      
 ```
 <br><br>
@@ -64,6 +60,7 @@ You can also customize it ([see](#chipsinput-attributes) all attributes) :
         app:chip_hasAvatarIcon="true"
         app:chip_backgroundColor="@color/customColor"
         app:chip_deletable="false"
+        app:isHorizontal="false"
         app:chip_deleteIconColor="@color/customColor"
         app:chip_detailed_textColor="@color/customColor"
         app:chip_detailed_backgroundColor="@color/customColor"
@@ -76,7 +73,7 @@ You can also customize it ([see](#chipsinput-attributes) all attributes) :
 You can pass a `List<? extends ChipInterface>` object, which represents your suggestions, to the `ChipsInput` view, so it will work as a
 `MultiAutoCompleteTextView` :
 
-##### 1. Create a class that implements `ChipInterface` (or use directly the [`Chip`](https://github.com/pchmn/MaterialChipsInput/blob/master/library/src/main/java/com/pchmn/materialchips/model/Chip.java) class included in the library) :
+##### 1. Create a class that implements `ChipInterface` (or use directly the [`Chip`](https://github.com/karanatwal/MaterialChipsInput/blob/master/library/src/main/java/com/pchmn/materialchips/model/Chip.java) class included in the library) :
 ```java
 public class ContactChip implements ChipInterface {
     ...
@@ -179,6 +176,7 @@ List<ChipInterface> contactsSelected = chipsInput.getSelectedChipList();
 Attribute | Type | Description | Default
 --- | --- | --- | ---
 `app:hint` | `string` | Hint of the input when there is no chip | null
+`app:isHorizontal` | `boolean` | Set orientation of Chips horizontally in single line | false
 `app:hintColor` | `color` | Hint color | android default 
 `app:textColor` | `color` | Text color when user types | android default
 `app:maxRows` | `int` | Max rows of chips | 2
@@ -198,7 +196,7 @@ Attribute | Type | Description | Default
 ## ChipView
 This view implements the chip component according to the [Material Design guidelines](https://material.io/guidelines/components/chips.html#chips-usage) with configurable options (background color, text color, ...).
 
-<img src="https://github.com/pchmn/MaterialChipsInput/blob/master/docs/chips-examples.png" alt="Chips examples" width="50%"/>
+<img src="https://github.com/karanatwal/MaterialChipsInput/blob/master/docs/chips-examples.png" alt="Chips examples" width="50%"/>
 
 ### Usage
 ```xml
@@ -262,22 +260,15 @@ chip.setOnDeleteClicked(new View.OnClickListener() {
 });
 ```
 <br><br>
-## Sample
-
-A sample app with some use cases of the library is available on this [link](https://github.com/pchmn/MaterialChipsInput/tree/master/sample)
-
-You can also download the sample APK [here](https://github.com/pchmn/MaterialChipsInput/raw/master/docs/material-chips-input-sample-v1.0.0.apk)
 
 ## Credits
 
-* [Android Material Chips](https://github.com/DoodleScheduling/android-material-chips)
-* [Material Chip View](https://github.com/robertlevonyan/materialChipView?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=5396)
-* [ChipsLayoutManager](https://github.com/BelooS/ChipsLayoutManager)
+* [Material Chips Input](https://github.com/pchmn/MaterialChipsInput)
 
 ## License
 
 ```
-Copyright 2017 pchmn
+Copyright 2017 karanatwal
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
