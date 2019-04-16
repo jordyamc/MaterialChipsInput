@@ -73,7 +73,7 @@ You can also customize it ([see](#chipsinput-attributes) all attributes) :
 You can pass a `List<? extends ChipInterface>` object, which represents your suggestions, to the `ChipsInput` view, so it will work as a
 `MultiAutoCompleteTextView` :
 
-##### 1. Create a class that implements `ChipInterface` (or use directly the [`Chip`](https://github.com/karanatwal/MaterialChipsInput/blob/master/library/src/main/java/com/pchmn/materialchips/model/Chip.java) class included in the library) :
+##### 1. Create a class that implements `ChipInterface` (or use directly the [`Chip`](https://github.com/karanatwal/MaterialChipsInput/blob/master/library/src/main/java/com/materialchips/model/Chip.java) class included in the library) :
 ```java
 public class ContactChip implements ChipInterface {
     ...
