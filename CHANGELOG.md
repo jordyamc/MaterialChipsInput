@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 2.0.0
+AndroidX and Orientation Support with all dependencies up to dated.
+
 # 1.0.8
 
 Fixed bug related with [issue #16](https://github.com/pchmn/MaterialChipsInput/issues/16)
