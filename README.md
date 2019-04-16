@@ -40,7 +40,7 @@ But everything is configurable (optional avatar icon, optional full detailed vie
 Use the ChipsInput view in your layout with default options  :
 
 ```xml
-<com.pchmn.materialchips.ChipsInput
+<com.materialchips.ChipsInput
         android:id="@+id/chips_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@ Use the ChipsInput view in your layout with default options  :
 ```
 You can also customize it ([see](#chipsinput-attributes) all attributes) :
 ```xml
-<com.pchmn.materialchips.ChipsInput
+<com.materialchips.ChipsInput
         android:id="@+id/chips_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -200,18 +200,18 @@ This view implements the chip component according to the [Material Design guidel
 
 ### Usage
 ```xml
-<com.pchmn.materialchips.ChipView
+<com.materialchips.ChipView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:label="Chip 1" />
             
-<com.pchmn.materialchips.ChipView
+<com.materialchips.ChipView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:label="Chip 4"
                 app:hasAvatarIcon="true" />
 
-<com.pchmn.materialchips.ChipView
+<com.materialchips.ChipView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:label="Chip 6"

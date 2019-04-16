@@ -1,17 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-
 android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 28
-        versionCode 9
-        versionName "1.0.8"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        versionCode 1
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -32,10 +27,6 @@ dependencies {
 
     // circle image view
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-
-    // butter knife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 }
 
 apply plugin: 'com.github.dcendents.android-maven'

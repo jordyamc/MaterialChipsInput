@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:id="@+id/chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 app:hasAvatarIcon="false"
                 app:deletable="false"/>
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:id="@+id/chip3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 app:hasAvatarIcon="false"
                 app:deletable="true"/>
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:id="@+id/chip4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:id="@+id/chip5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 app:label="Chip 4"
                 app:hasAvatarIcon="true" />
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:visibility="gone"
                 android:id="@+id/chip6"
                 android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                 app:deleteIcon="@drawable/ic_check_circle_black_24dp"
                 app:deleteIconColor="#A6A6A6"/>
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:id="@+id/chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 app:deletable="true"
                 app:deleteIconColor="@color/colorPrimary"/>
 
-            <com.pchmn.materialchips.ChipView
+            <com.materialchips.ChipView
                 android:id="@+id/chip7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

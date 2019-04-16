@@ -8,7 +8,7 @@
     android:padding="16dp"
     tools:context="com.pchmn.sample.materialchipsinput.ContactListActivity">
 
-    <com.pchmn.materialchips.ChipsInput
+    <com.materialchips.ChipsInput
         android:id="@+id/chips_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

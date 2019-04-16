@@ -4,12 +4,11 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.pchmn.sample.materialchipsinput"
+        applicationId "com.sample.materialchipsinput"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 9
-        versionName "1.0.8"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 1
+        versionName "1.0.0"
     }
     buildTypes {
         release {
