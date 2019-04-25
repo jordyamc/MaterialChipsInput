@@ -56,6 +56,7 @@ You can also customize it ([see](#chipsinput-attributes) all attributes) :
         app:hintColor="@color/customColor"
         app:textColor="@color/customColor"
         app:maxRows="3"
+        app:chipBackground="@drawable/my_custom_bg"
         app:chip_labelColor="@color/customColor"
         app:chip_hasAvatarIcon="true"
         app:chip_backgroundColor="@color/customColor"
@@ -231,6 +232,7 @@ Attribute | Type | Description | Default
 `app:labelColor` | `color` | Label color of the chip | android default
 `app:hasAvatarIcon` | `boolean` | Whether the chip has avatar icon or not | false
 `app:avatarIcon` | `drawable` | Avatar icon resource | null
+`app:chipBackground` | `drawable` | Chip background resource | material chip default
 `app:deletable` | `boolean` | Whether the chip is deletable (delete icon) or not | false
 `app:deleteIconColor` | `color` | Delete icon color of the chip | grey
 `app:backgroundColor` | `color` | Background color of the chip | grey
