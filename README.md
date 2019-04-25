@@ -24,7 +24,7 @@ allprojects {
 In your app level build.gradle :
 ```java
 dependencies {
-    compile 'com.github.karanatwal:MaterialChipsInput:2.0.0'
+    implementation 'com.github.karanatwal:MaterialChipsInput:2.0.0'
 }      
 ```
 <br><br>
