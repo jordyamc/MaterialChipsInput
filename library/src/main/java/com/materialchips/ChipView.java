@@ -25,6 +25,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChipView extends RelativeLayout {
 
     private static final String TAG = ChipView.class.toString();
+    // attributes
+    private static final int NONE = -1;
     // context
     private Context mContext;
     // xml elements
@@ -32,8 +34,6 @@ public class ChipView extends RelativeLayout {
     private CircleImageView mAvatarIconImageView;
     private TextView mLabelTextView;
     private ImageButton mDeleteButton;
-    // attributes
-    private static final int NONE = -1;
     private String mLabel;
     private ColorStateList mLabelColor;
     private boolean mHasAvatarIcon = false;
@@ -41,6 +41,7 @@ public class ChipView extends RelativeLayout {
     private Uri mAvatarIconUri;
     private boolean mDeletable = false;
     private Drawable mDeleteIcon;
+    private Drawable mChipBackground;
     private ColorStateList mDeleteIconColor;
     private ColorStateList mBackgroundColor;
     // letter tile provider
@@ -58,6 +59,24 @@ public class ChipView extends RelativeLayout {
         super(context, attrs);
         mContext = context;
         init(attrs);
+    }
+
+    private static ChipView newInstance(Builder builder) {
+        ChipView chipView = new ChipView(builder.context);
+        chipView.mLabel = builder.label;
+        chipView.mLabelColor = builder.labelColor;
+        chipView.mHasAvatarIcon = builder.hasAvatarIcon;
+        chipView.mAvatarIconUri = builder.avatarIconUri;
+        chipView.mAvatarIconDrawable = builder.avatarIconDrawable;
+        chipView.mDeletable = builder.deletable;
+        chipView.mDeleteIcon = builder.deleteIcon;
+        chipView.mDeleteIconColor = builder.deleteIconColor;
+        chipView.mBackgroundColor = builder.backgroundColor;
+        chipView.mChipBackground = builder.chipBackground;
+        chipView.mChip = builder.chip;
+        chipView.inflateWithAttributes();
+
+        return chipView;
     }
 
     /**
@@ -78,7 +97,7 @@ public class ChipView extends RelativeLayout {
         mLetterTileProvider = new LetterTileProvider(mContext);
 
         // attributes
-        if(attrs != null) {
+        if (attrs != null) {
             TypedArray a = mContext.getTheme().obtainStyledAttributes(
                     attrs,
                     R.styleable.ChipView,
@@ -91,17 +110,20 @@ public class ChipView extends RelativeLayout {
                 // avatar icon
                 mHasAvatarIcon = a.getBoolean(R.styleable.ChipView_hasAvatarIcon, false);
                 int avatarIconId = a.getResourceId(R.styleable.ChipView_avatarIcon, NONE);
-                if(avatarIconId != NONE) mAvatarIconDrawable = ContextCompat.getDrawable(mContext, avatarIconId);
-                if(mAvatarIconDrawable != null) mHasAvatarIcon = true;
+                if (avatarIconId != NONE)
+                    mAvatarIconDrawable = ContextCompat.getDrawable(mContext, avatarIconId);
+                if (mAvatarIconDrawable != null) mHasAvatarIcon = true;
                 // delete icon
                 mDeletable = a.getBoolean(R.styleable.ChipView_deletable, false);
                 mDeleteIconColor = a.getColorStateList(R.styleable.ChipView_deleteIconColor);
                 int deleteIconId = a.getResourceId(R.styleable.ChipView_deleteIcon, NONE);
-                if(deleteIconId != NONE) mDeleteIcon = ContextCompat.getDrawable(mContext, deleteIconId);
+                int backgroundId = a.getResourceId(R.styleable.ChipView_chipBackground, R.drawable.ripple_chip_view);
+                mChipBackground = ContextCompat.getDrawable(mContext, backgroundId);
+                if (deleteIconId != NONE)
+                    mDeleteIcon = ContextCompat.getDrawable(mContext, deleteIconId);
                 // background color
                 mBackgroundColor = a.getColorStateList(R.styleable.ChipView_backgroundColor);
-            }
-            finally {
+            } finally {
                 a.recycle();
             }
         }
@@ -116,7 +138,7 @@ public class ChipView extends RelativeLayout {
     private void inflateWithAttributes() {
         // label
         setLabel(mLabel);
-        if(mLabelColor != null)
+        if (mLabelColor != null)
             setLabelColor(mLabelColor);
 
         // avatar
@@ -126,8 +148,10 @@ public class ChipView extends RelativeLayout {
         setDeletable(mDeletable);
 
         // background color
-        if(mBackgroundColor != null)
+        if (mBackgroundColor != null)
             setChipBackgroundColor(mBackgroundColor);
+
+        setChipBackground(mChipBackground);
     }
 
     public void inflate(ChipInterface chip) {
@@ -141,6 +165,7 @@ public class ChipView extends RelativeLayout {
         // inflate
         inflateWithAttributes();
     }
+
 
     /**
      * Get label
@@ -189,29 +214,28 @@ public class ChipView extends RelativeLayout {
     public void setHasAvatarIcon(boolean hasAvatarIcon) {
         mHasAvatarIcon = hasAvatarIcon;
 
-        if(!mHasAvatarIcon) {
+        if (!mHasAvatarIcon) {
             // hide icon
             mAvatarIconImageView.setVisibility(GONE);
             // adjust padding
-            if(mDeleteButton.getVisibility() == VISIBLE)
+            if (mDeleteButton.getVisibility() == VISIBLE)
                 mLabelTextView.setPadding(ViewUtil.dpToPx(12), 0, 0, 0);
             else
                 mLabelTextView.setPadding(ViewUtil.dpToPx(12), 0, ViewUtil.dpToPx(12), 0);
 
-        }
-        else {
+        } else {
             // show icon
             mAvatarIconImageView.setVisibility(VISIBLE);
             // adjust padding
-            if(mDeleteButton.getVisibility() == VISIBLE)
+            if (mDeleteButton.getVisibility() == VISIBLE)
                 mLabelTextView.setPadding(ViewUtil.dpToPx(8), 0, 0, 0);
             else
                 mLabelTextView.setPadding(ViewUtil.dpToPx(8), 0, ViewUtil.dpToPx(12), 0);
 
             // set icon
-            if(mAvatarIconUri != null)
+            if (mAvatarIconUri != null)
                 mAvatarIconImageView.setImageURI(mAvatarIconUri);
-            else if(mAvatarIconDrawable != null)
+            else if (mAvatarIconDrawable != null)
                 mAvatarIconImageView.setImageDrawable(mAvatarIconDrawable);
             else
                 mAvatarIconImageView.setImageBitmap(mLetterTileProvider.getLetterTile(getLabel()));
@@ -241,34 +265,46 @@ public class ChipView extends RelativeLayout {
     }
 
     /**
+     * Set chip background
+     *
+     * @param chipBackground the chip background
+     */
+    public void setChipBackground(Drawable chipBackground) {
+        if (chipBackground != null) {
+            mChipBackground = chipBackground;
+            mContentLayout.setBackground(chipBackground);
+        }
+    }
+
+
+    /**
      * Show or hide delte button
      *
      * @param deletable true to show, false to hide
      */
     public void setDeletable(boolean deletable) {
         mDeletable = deletable;
-        if(!mDeletable) {
+        if (!mDeletable) {
             // hide delete icon
             mDeleteButton.setVisibility(GONE);
             // adjust padding
-            if(mAvatarIconImageView.getVisibility() == VISIBLE)
+            if (mAvatarIconImageView.getVisibility() == VISIBLE)
                 mLabelTextView.setPadding(ViewUtil.dpToPx(8), 0, ViewUtil.dpToPx(12), 0);
             else
                 mLabelTextView.setPadding(ViewUtil.dpToPx(12), 0, ViewUtil.dpToPx(12), 0);
-        }
-        else {
+        } else {
             // show icon
             mDeleteButton.setVisibility(VISIBLE);
             // adjust padding
-            if(mAvatarIconImageView.getVisibility() == VISIBLE)
+            if (mAvatarIconImageView.getVisibility() == VISIBLE)
                 mLabelTextView.setPadding(ViewUtil.dpToPx(8), 0, 0, 0);
             else
                 mLabelTextView.setPadding(ViewUtil.dpToPx(12), 0, 0, 0);
 
             // set icon
-            if(mDeleteIcon != null)
+            if (mDeleteIcon != null)
                 mDeleteButton.setImageDrawable(mDeleteIcon);
-            if(mDeleteIconColor != null)
+            if (mDeleteIconColor != null)
                 mDeleteButton.getDrawable().mutate().setColorFilter(mDeleteIconColor.getDefaultColor(), PorterDuff.Mode.SRC_ATOP);
         }
     }
@@ -365,6 +401,7 @@ public class ChipView extends RelativeLayout {
         private Drawable avatarIconDrawable;
         private boolean deletable = false;
         private Drawable deleteIcon;
+        private Drawable chipBackground;
         private ColorStateList deleteIconColor;
         private ColorStateList backgroundColor;
         private ChipInterface chip;
@@ -408,6 +445,11 @@ public class ChipView extends RelativeLayout {
             return this;
         }
 
+        public Builder chipBackground(Drawable chipBackground) {
+            this.chipBackground = chipBackground;
+            return this;
+        }
+
         public Builder deleteIconColor(ColorStateList deleteIconColor) {
             this.deleteIconColor = deleteIconColor;
             return this;
@@ -429,22 +471,5 @@ public class ChipView extends RelativeLayout {
         public ChipView build() {
             return newInstance(this);
         }
-    }
-
-    private static ChipView newInstance(Builder builder) {
-        ChipView chipView = new ChipView(builder.context);
-        chipView.mLabel = builder.label;
-        chipView.mLabelColor = builder.labelColor;
-        chipView.mHasAvatarIcon = builder.hasAvatarIcon;
-        chipView.mAvatarIconUri = builder.avatarIconUri;
-        chipView.mAvatarIconDrawable = builder.avatarIconDrawable;
-        chipView.mDeletable = builder.deletable;
-        chipView.mDeleteIcon = builder.deleteIcon;
-        chipView.mDeleteIconColor = builder.deleteIconColor;
-        chipView.mBackgroundColor = builder.backgroundColor;
-        chipView.mChip = builder.chip;
-        chipView.inflateWithAttributes();
-
-        return chipView;
     }
 }

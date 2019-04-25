@@ -8,6 +8,7 @@
         <attr name="avatarIcon" format="reference" />
         <attr name="deletable" format="boolean" />
         <attr name="deleteIcon" format="reference" />
+        <attr name="chipBackground" format="reference" />
         <attr name="deleteIconColor" format="color" />
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
