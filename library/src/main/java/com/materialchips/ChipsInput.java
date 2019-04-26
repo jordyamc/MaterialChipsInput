@@ -49,6 +49,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
     private boolean mChipDeletable = false;
     private boolean isHorizontal = false;
     private Drawable mChipDeleteIcon;
+    private Drawable mChipBackground;
     private ColorStateList mChipDeleteIconColor;
     private ColorStateList mChipBackgroundColor;
     private boolean mShowChipDetailed = true;
@@ -118,6 +119,9 @@ public class ChipsInput extends ScrollViewMaxHeight {
                     mChipDeleteIcon = ContextCompat.getDrawable(mContext, deleteIconId);
                 // chip background color
                 mChipBackgroundColor = a.getColorStateList(R.styleable.ChipsInput_chip_backgroundColor);
+                //chip background drawable
+                int backgroundId = a.getResourceId(R.styleable.ChipsInput_chip_background, R.drawable.ripple_chip_view);
+                mChipBackground = ContextCompat.getDrawable(mContext, backgroundId);
                 // show chip detailed
                 mShowChipDetailed = a.getBoolean(R.styleable.ChipsInput_showChipDetailed, true);
                 // chip detailed text color
@@ -217,6 +221,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 .hasAvatarIcon(mChipHasAvatarIcon)
                 .deletable(mChipDeletable)
                 .deleteIcon(mChipDeleteIcon)
+                .chipBackground(mChipBackground)
                 .deleteIconColor(mChipDeleteIconColor)
                 .backgroundColor(mChipBackgroundColor)
                 .build();
@@ -329,6 +334,10 @@ public class ChipsInput extends ScrollViewMaxHeight {
 
     public void setChipDeleteIcon(Drawable mDeleteIcon) {
         this.mChipDeleteIcon = mDeleteIcon;
+    }
+
+    public void setChipBackground(Drawable chipBackground) {
+        this.mChipBackground = chipBackground;
     }
 
     public void setChipDeleteIconColor(ColorStateList mDeleteIconColor) {
