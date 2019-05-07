@@ -15,6 +15,7 @@
 
     <declare-styleable name="ChipsInput">
         <attr name="hint" format="string" />
+        <attr name="fontSize" format="dimension" />
         <attr name="isHorizontal" format="boolean" />
         <attr name="hintColor" format="color" />
         <attr name="textColor" format="color" />

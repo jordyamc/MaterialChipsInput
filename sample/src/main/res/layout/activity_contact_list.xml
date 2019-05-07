@@ -8,14 +8,22 @@
     android:padding="16dp"
     tools:context="com.sample.materialchipsinput.ContactListActivity">
 
+
+
     <com.materialchips.ChipsInput
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rectangle_border_grey"
         android:id="@+id/chips_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:chip_background="@drawable/my_bg"
-        app:hint="Enter a name"
+        android:layout_height="34dp"
+        app:fontSize="10sp"
         app:isHorizontal="true"
-        app:maxRows="5" />
+        app:chip_hasAvatarIcon="false"
+        app:chip_deleteIcon="@mipmap/cross"
+        app:chip_deletable="true"
+        app:chip_background="@drawable/round_rect_blue"
+        app:showChipDetailed="false"
+        app:chip_labelColor="@android:color/white" />
 
     <Button
         android:id="@+id/validate"

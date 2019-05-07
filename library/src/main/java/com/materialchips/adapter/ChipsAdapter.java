@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,14 +120,15 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void initEditText() {
-        mEditText.setLayoutParams(new RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+                ViewGroup.LayoutParams.MATCH_PARENT);
+
+        mEditText.setLayoutParams(lp);
         mEditText.setHint(mHintLabel);
         mEditText.setBackgroundResource(android.R.color.transparent);
-        // prevent fullscreen on landscape
-        mEditText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
-        mEditText.setPrivateImeOptions("nm");
+        int padding = ViewUtil.dpToPx(4);
+        mEditText.setPadding(padding,padding,padding,padding);
         // no suggestion
         mEditText.setInputType(InputType.TYPE_TEXT_VARIATION_FILTER | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
@@ -168,6 +170,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         // min width of edit text = 50 dp
         ViewGroup.LayoutParams params = mEditText.getLayoutParams();
         params.width = ViewUtil.dpToPx(50);
+
         mEditText.setLayoutParams(params);
 
         // listen to change in the tree
@@ -188,13 +191,8 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mEditText.requestFocus();
 
                 // remove the listener:
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    mEditText.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    mEditText.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
+                mEditText.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
-
         });
     }
 

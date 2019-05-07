@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager;
@@ -44,12 +45,13 @@ public class ChipsInput extends ScrollViewMaxHeight {
     private ColorStateList mHintColor;
     private ColorStateList mTextColor;
     private int mMaxRows = 2;
+    private int fontSize = 15;
     private ColorStateList mChipLabelColor;
     private boolean mChipHasAvatarIcon = true;
     private boolean mChipDeletable = false;
     private boolean isHorizontal = false;
     private Drawable mChipDeleteIcon;
-    private Drawable mChipBackground;
+    private Integer mChipBackground;
     private ColorStateList mChipDeleteIconColor;
     private ColorStateList mChipBackgroundColor;
     private boolean mShowChipDetailed = true;
@@ -105,6 +107,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 mHintColor = a.getColorStateList(R.styleable.ChipsInput_hintColor);
                 mTextColor = a.getColorStateList(R.styleable.ChipsInput_textColor);
                 mMaxRows = a.getInteger(R.styleable.ChipsInput_maxRows, 2);
+                fontSize = a.getDimensionPixelSize(R.styleable.ChipsInput_fontSize,15);
                 setMaxHeight(ViewUtil.dpToPx((40 * mMaxRows) + 8));
                 //setVerticalScrollBarEnabled(true);
                 // chip label color
@@ -120,8 +123,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 // chip background color
                 mChipBackgroundColor = a.getColorStateList(R.styleable.ChipsInput_chip_backgroundColor);
                 //chip background drawable
-                int backgroundId = a.getResourceId(R.styleable.ChipsInput_chip_background, R.drawable.ripple_chip_view);
-                mChipBackground = ContextCompat.getDrawable(mContext, backgroundId);
+                mChipBackground = a.getResourceId(R.styleable.ChipsInput_chip_background, R.drawable.ripple_chip_view);
                 // show chip detailed
                 mShowChipDetailed = a.getBoolean(R.styleable.ChipsInput_showChipDetailed, true);
                 // chip detailed text color
@@ -224,6 +226,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 .chipBackground(mChipBackground)
                 .deleteIconColor(mChipDeleteIconColor)
                 .backgroundColor(mChipBackgroundColor)
+                .fontSize(fontSize)
                 .build();
 
         chipView.setPadding(padding, padding, padding, padding);
@@ -238,6 +241,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
         if (mTextColor != null)
             editText.setTextColor(mTextColor);
 
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_PX,fontSize);
         return editText;
     }
 
@@ -336,7 +340,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
         this.mChipDeleteIcon = mDeleteIcon;
     }
 
-    public void setChipBackground(Drawable chipBackground) {
+    public void setChipBackground(Integer chipBackground) {
         this.mChipBackground = chipBackground;
     }
 
