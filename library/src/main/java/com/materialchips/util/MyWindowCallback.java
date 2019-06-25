@@ -55,10 +55,15 @@ public class MyWindowCallback implements Window.Callback {
             if (v instanceof ChipsInputEditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())
-                        && !((ChipsInputEditText) v).isFilterableListVisible()) {
-                    InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                if (!outRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
+                    ChipsInputEditText filterableList = ((ChipsInputEditText) v);
+                    Rect listRect = new Rect();
+                    filterableList.getGlobalVisibleRect(listRect);
+                    if (filterableList.isFilterableListVisible() && !listRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
+                        filterableList.setVisibility(View.GONE);
+                        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }
                 }
             }
         }

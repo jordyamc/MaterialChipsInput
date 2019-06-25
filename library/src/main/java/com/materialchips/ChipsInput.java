@@ -46,6 +46,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
     private ColorStateList mTextColor;
     private int mMaxRows = 2;
     private int fontSize = 15;
+    private int chipFontSize = 13;
     private ColorStateList mChipLabelColor;
     private boolean mChipHasAvatarIcon = true;
     private boolean mChipDeletable = false;
@@ -108,6 +109,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 mTextColor = a.getColorStateList(R.styleable.ChipsInput_textColor);
                 mMaxRows = a.getInteger(R.styleable.ChipsInput_maxRows, 2);
                 fontSize = a.getDimensionPixelSize(R.styleable.ChipsInput_fontSize,15);
+                chipFontSize = a.getDimensionPixelSize(R.styleable.ChipsInput_chipFontSize,13);
                 setMaxHeight(ViewUtil.dpToPx((40 * mMaxRows) + 8));
                 //setVerticalScrollBarEnabled(true);
                 // chip label color
@@ -226,7 +228,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 .chipBackground(mChipBackground)
                 .deleteIconColor(mChipDeleteIconColor)
                 .backgroundColor(mChipBackgroundColor)
-                .fontSize(fontSize)
+                .fontSize(chipFontSize)
                 .build();
 
         chipView.setPadding(padding, padding, padding, padding);
