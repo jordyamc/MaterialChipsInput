@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,6 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.materialchips.views.ChipsInputEditText;
 import com.materialchips.views.DetailedChipView;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 public class MyWindowCallback implements Window.Callback {
 
@@ -45,7 +46,7 @@ public class MyWindowCallback implements Window.Callback {
     public boolean dispatchTouchEvent(MotionEvent motionEvent) {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             View v = mActivity.getCurrentFocus();
-            if(v instanceof DetailedChipView) {
+            if (v instanceof DetailedChipView) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
@@ -59,8 +60,13 @@ public class MyWindowCallback implements Window.Callback {
                     ChipsInputEditText filterableList = ((ChipsInputEditText) v);
                     Rect listRect = new Rect();
                     filterableList.getGlobalVisibleRect(listRect);
-                    if (filterableList.isFilterableListVisible() && !listRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
-                        filterableList.setVisibility(View.GONE);
+                    if (filterableList.isFilterableListVisible()) {
+                        if (!listRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
+                            filterableList.setVisibility(View.GONE);
+                            InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
+                    } else {
                         InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     }
