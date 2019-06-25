@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.materialchips.views.ChipsInputEditText;
 import com.materialchips.views.DetailedChipView;
+import com.materialchips.views.FilterableListView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -57,12 +58,13 @@ public class MyWindowCallback implements Window.Callback {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
-                    ChipsInputEditText filterableList = ((ChipsInputEditText) v);
-                    Rect listRect = new Rect();
-                    filterableList.getGlobalVisibleRect(listRect);
-                    if (filterableList.isFilterableListVisible()) {
+                    ChipsInputEditText inputEditText = ((ChipsInputEditText) v);
+                    FilterableListView filterableListView = inputEditText.getFilterableListView();
+                    if (inputEditText.isFilterableListVisible()) {
+                        Rect listRect = new Rect();
+                        filterableListView.getGlobalVisibleRect(listRect);
                         if (!listRect.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY())) {
-                            filterableList.setVisibility(View.GONE);
+                            filterableListView.setVisibility(View.GONE);
                             InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
