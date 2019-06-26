@@ -37,7 +37,6 @@ public class ChipsInputEditText extends androidx.appcompat.widget.AppCompatEditT
             }catch (Exception e){
                 //
             }
-            return true;
         }
         return super.onKeyPreIme(keyCode, event);
     }
