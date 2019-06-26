@@ -3,6 +3,7 @@ package com.materialchips.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 
 public class ChipsInputEditText extends androidx.appcompat.widget.AppCompatEditText {
 
@@ -26,5 +27,18 @@ public class ChipsInputEditText extends androidx.appcompat.widget.AppCompatEditT
 
     public void setFilterableListView(FilterableListView filterableListView) {
         this.filterableListView = filterableListView;
+    }
+
+    @Override
+    public boolean onKeyPreIme(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            try {
+                filterableListView.setVisibility(GONE);
+            }catch (Exception e){
+                //
+            }
+            return true;
+        }
+        return super.onKeyPreIme(keyCode, event);
     }
 }
