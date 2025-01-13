@@ -27,7 +27,7 @@ dependencies {
 
     // recycler
     implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
-    implementation 'com.github.jordyamc:ChipsLayoutManager:0.5.1'
+    implementation 'com.github.jordyamc:ChipsLayoutManager:0.5.3'
     //implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
 
     // circle image view
