@@ -1,12 +1,8 @@
 package com.materialchips.util;
 
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.util.TypedValue;
-
-import com.materialchips.R;
 
 public class ColorUtil {
 
@@ -28,11 +24,5 @@ public class ColorUtil {
     public static boolean isColorDark(int color){
         double darkness = 1 - (0.2126*Color.red(color) + 0.7152*Color.green(color) + 0.0722*Color.blue(color))/255;
         return darkness >= 0.5;
-    }
-
-    public static int getThemeAccentColor (final Context context) {
-        final TypedValue value = new TypedValue ();
-        context.getTheme ().resolveAttribute (R.attr.colorAccent, value, true);
-        return value.data;
     }
 }

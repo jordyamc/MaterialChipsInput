@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager;
+import ir.mahdiparastesh.chlm.ChipsLayoutManager;
 import com.materialchips.adapter.ChipsAdapter;
 import com.materialchips.model.Chip;
 import com.materialchips.model.ChipInterface;
